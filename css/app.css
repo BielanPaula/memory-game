@@ -1,0 +1,196 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    font-family: 'Coda', cursive;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+.score-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/*
+ * Styles for the deck of cards
+ */
+
+.deck {
+    width: 660px;
+    min-height: 680px;
+    background: linear-gradient(160deg, rgb(0, 242, 255) 0%, rgb(37, 91, 224) 100%);
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 3em;
+}
+
+.deck .end {
+    width: 660px;
+    min-height: 680px;
+    background: linear-gradient(160deg, pink 0%, rgb(37, 91, 224) 100%);
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 3em;
+}
+
+
+.deck .card {
+    height: 125px;
+    width: 125px;
+    background: #2e3d49;
+    font-size: 0;
+    color: #ffffff;
+    border-radius: 100%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+.deck .card.open {
+    transform: rotateY(0);
+    background: rgb(38, 1, 77);
+    cursor: default;
+}
+
+.deck .card.show {
+    font-size: 33px;
+}
+
+.deck .card.match {
+    cursor: default;
+    background: rgb(92, 0, 161);
+    font-size: 33px;
+}
+
+.deck .card.unmatch {
+    cursor: pointer;
+    background: #2e3d49;
+    font-size: 0px;
+    cursor: default;
+}
+/*
+ * Styles for the Score Panel
+ */
+
+.score-panel {
+    text-align: left;
+    width: 345px;
+    margin-bottom: 10px;
+}
+
+.score-panel .stars {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+}
+
+.score-panel .stars li {
+    list-style: none;
+    display: inline-block;
+
+}
+
+.score-panel .restart {
+    float: right;
+    cursor: pointer;
+}
+
+/*
+ * Styles for the Popup
+ */
+
+.overlay {
+  background: rgba(0, 0, 0, 0.7);
+	visibility: hidden;
+	opacity: 0;
+  position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.popup {
+  background: rgb(255, 255, 255);
+  border-radius: 5px;
+	width: 50%;
+  padding: 10px;
+  position: relative;
+  margin: 80px auto;
+}
+
+.popup
+.popupContent {
+	max-height: 30%;
+	overflow: auto;
+	text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.show {
+	visibility: visible;
+	opacity: 100;
+}
+
+#finalStars li {
+	display: inline-block;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#close {
+    float: right;
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#buttonPlayAgain {
+	background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
+  width: 50%;
+	padding: 1em 1em;
+	margin: 0 auto;
+  display: block;
+  font-family: 'Open Sans', sans-serif;
+}
