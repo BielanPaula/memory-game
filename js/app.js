@@ -89,14 +89,53 @@ function moveCounter() {
 * timer
 */
 
-function timer(){
-  setTimeout(function(){
-    var timeCounter = document.querySelector(".time");
-    time += 1;
-    timeCounter.innerHTML = time;
-    timer();
-  },1000)
+// function timer(){
+//   setTimeout(function(){
+//var timeCounter = document.querySelector(".time");
+//     time += 1;
+//     timeCounter.innerHTML = time;
+//     timer();
+//   },1000)
+// }
+
+var timeCounter = document.querySelector(".time");
+
+var seconds = 0;
+var minutes = 0;
+var hours = 0;
+var t;
+
+function add() {
+    seconds++;
+        if (seconds >= 60) {
+            seconds = 0;
+            minutes++;
+            if (minutes >= 60) {
+                minutes = 0;
+                hours++;
+            }
+        }
+    timeText = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+    timeCounter.innerHTML = timeText;
+    startTimer();
 }
+
+//start timer
+function startTimer() {
+    t = setTimeout(add, 1000);
+}
+
+//stop timer
+function stopTimer() {
+  clearTimeout(t);
+}
+
+//clear timer
+function clearTimer() {
+    timeCounter.textContent = "00:00:00";
+    seconds = 0; minutes = 0; hours = 0;
+}
+
 
 /*
 * close button on popup
@@ -118,7 +157,7 @@ starRating = document.querySelector(".stars").innerHTML;
 modal.classList.add("show");
 document.getElementById("finalMoves").innerHTML = counter;
 document.getElementById("finalStars").innerHTML = starRating;
-document.getElementById("finalTime").innerHTML = time;
+document.getElementById("finalTime").innerHTML = timeText;
 closeModal();
 }
 
@@ -128,9 +167,9 @@ closeModal();
 
 var repeatGame = function () {
   displayShuffledCards();
-
   counter = 0;
-  time = 0;
+  stopTimer();
+  clearTimer();
   stars[0].style.visibility = "visible";
   stars[1].style.visibility = "visible";
   stars[2].style.visibility = "visible";
@@ -175,11 +214,10 @@ return;
 
 activeCard.classList.add("open","show"); //when click -> open and show
 starCounter();
-timer();
+startTimer();
 
     //first click
     if (activeCards.length === 0) {
-      console.log('pierwsze kliknięcie',cards);
         activeCards[0] = activeCard; //add first card to array
         return;
       }
@@ -187,7 +225,6 @@ timer();
 
     //second click
     else {
-      console.log('drugie kliknięcie',cards);
         cards.forEach(function (card) {
             activeCards[1] = activeCard; //add second card to array
 
