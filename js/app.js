@@ -89,15 +89,6 @@ function moveCounter() {
 * timer
 */
 
-// function timer(){
-//   setTimeout(function(){
-//var timeCounter = document.querySelector(".time");
-//     time += 1;
-//     timeCounter.innerHTML = time;
-//     timer();
-//   },1000)
-// }
-
 var timeCounter = document.querySelector(".time");
 
 var seconds = 0;
@@ -117,17 +108,16 @@ function add() {
         }
     timeText = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
     timeCounter.innerHTML = timeText;
-    startTimer();
 }
 
 //start timer
 function startTimer() {
-    t = setTimeout(add, 1000);
+    t = setInterval(add, 1000);
 }
 
 //stop timer
 function stopTimer() {
-  clearTimeout(t);
+  clearInterval(t);
 }
 
 //clear timer
@@ -166,10 +156,9 @@ closeModal();
 */
 
 var repeatGame = function () {
+  clearTimer();
   displayShuffledCards();
   counter = 0;
-  stopTimer();
-  clearTimer();
   stars[0].style.visibility = "visible";
   stars[1].style.visibility = "visible";
   stars[2].style.visibility = "visible";
@@ -205,7 +194,7 @@ activeCard = this; //card which clicked
 
 let matchedCards = cards.filter(card => card.classList.contains("match"))
 if (matchedCards.includes(activeCard)) {//second bug; blocked on the matched cards
-  return;
+return;
 }
 
 if (activeCards.includes(activeCard)) {//first bug; blocked clicking on the same card in the same round (it will make match)
@@ -214,10 +203,10 @@ return;
 
 activeCard.classList.add("open","show"); //when click -> open and show
 starCounter();
-startTimer();
 
     //first click
     if (activeCards.length === 0) {
+        startTimer();
         activeCards[0] = activeCard; //add first card to array
         return;
       }
@@ -237,11 +226,11 @@ startTimer();
                             if (activeCards[0].innerHTML === activeCards[1].innerHTML) {
                                 activeCards.forEach(function (card) {
                                     card.classList.add("match")
-                                    //cards = cards.filter(card => !card.classList.contains("match")) //second bug; block cliking on the open cards again
                                 })
                                     //end game
                                     gameResult = gameResult + 1 //adding new pair to Array
                                     if (gameResult == 8) {
+                                        stopTimer();
                                         congratulation();
                                     }
                             }
